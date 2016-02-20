@@ -28,5 +28,11 @@ public class Productos {
       this.audioLibros.add(a);
   }
   
+  public void rentaProducto(){
+      
+  }
   
+  public void verificarProducto(){
+      
+  }
 }
