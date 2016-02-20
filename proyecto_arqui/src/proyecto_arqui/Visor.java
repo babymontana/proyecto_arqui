@@ -11,7 +11,7 @@ package proyecto_arqui;
  */
 public class Visor {
     
-    private Productos productos = new Productos();
+    private Productos productos;
     
     public void visualizarProductos(){
         

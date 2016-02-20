@@ -14,7 +14,9 @@ public class Productos {
     
   private ArrayList<Libro> libros= new ArrayList<Libro>();
   private ArrayList<Revista> revistas= new ArrayList<Revista>();
-  private ArrayList<AudioLibro> audioLibros= new ArrayList<AudioLibro>();    
+  private ArrayList<AudioLibro> audioLibros= new ArrayList<AudioLibro>(); 
+  
+  private ProductoMaker maker = new ProductoMaker();
   
   public void agregarLibro(Libro l){
       this.libros.add(l);

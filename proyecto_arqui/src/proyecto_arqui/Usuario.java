@@ -13,7 +13,7 @@ import java.util.Date;
 public class Usuario {
     
     private int id;
-    private Visor visor = new Visor();
+    private Visor visor;
     private Date fechaRegistro;
 
     public int getId() {
