@@ -32,7 +32,7 @@ public class Productos {
       
   }
   
-  public void verificarProducto(){
+  public void verificarVencimiento(){
       
   }
 }

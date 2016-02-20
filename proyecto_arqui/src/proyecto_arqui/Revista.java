@@ -4,10 +4,18 @@
  */
 package proyecto_arqui;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Emmanuel
  */
 public class Revista {
+    
+    private ArrayList<Articulo> articulos = new ArrayList<Articulo>();
+    
+    public Articulo getArticulo(int i){
+        return articulos.get(i);
+    }
     
 }
