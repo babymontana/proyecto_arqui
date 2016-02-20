@@ -4,6 +4,8 @@
  */
 package proyecto_arqui;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Emmanuel
@@ -17,9 +19,9 @@ public class ProductoMaker {
     private BuilderLibro builderLibro = new BuilderLibro();
     private BuilderRevista builderRevista = new BuilderRevista();
     private BuilderAudioLibro builderAudioLibro = new BuilderAudioLibro();
-    
-    public Libro generarLibro(){
-        this.libro = builderLibro.builtLibro();
+   
+    public Libro generarLibro(Libro l, ArrayList<Integer> listaCapitulos){
+        this.libro = builderLibro.builtLibro(l, listaCapitulos);
         return this.libro;
     }
     

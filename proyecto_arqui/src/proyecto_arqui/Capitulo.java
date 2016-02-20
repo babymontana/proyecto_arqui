@@ -13,6 +13,14 @@ public class Capitulo {
     private String texto;
     private String titulo;
     private int numeroPaginas;
+    
+    public Capitulo(){}
+
+    public Capitulo(String texto, String titulo, int numeroPaginas) {
+        this.texto = texto;
+        this.titulo = titulo;
+        this.numeroPaginas = numeroPaginas;
+    }
 
     public String getTexto() {
         return texto;
@@ -37,7 +45,14 @@ public class Capitulo {
     public void setNumeroPaginas(int numeroPaginas) {
         this.numeroPaginas = numeroPaginas;
     }
-    
+
+    public String toString(){
+        StringBuilder texto = new StringBuilder();
+        texto.append("\nTitulo Capitulo: " + titulo);
+        texto.append("\nNo.Pags: " + numeroPaginas);
+        texto.append("\nTexto:\n" + this.texto);
+        return texto.toString();
+    }
     
     
 }

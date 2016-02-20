@@ -12,9 +12,13 @@ package proyecto_arqui;
 public class Visor {
     
     private Productos productos;
+
+    public Visor(Productos productos) {
+        this.productos = productos;
+    } 
     
     public void visualizarProductos(){
-        
+        productos.mostrarLibros();
     }
     
     public void presentarProductos(){
