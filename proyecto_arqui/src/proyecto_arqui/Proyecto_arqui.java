@@ -20,10 +20,14 @@ public class Proyecto_arqui extends JFrame {
     private JLabel nombre;
     private JScrollPane panel;
     private JTable table;
-    private Libro[] data;
+    private ArrayList<Libro> data = new ArrayList<Libro>();
+    private ArrayList<ArrayList<Integer>> seleccion= new ArrayList<ArrayList<Integer>> ();
     private JPanel abajo;
     private JButton generate;
+    private JButton regresar=new JButton("Regresar");
     private JTable capitulos;
+    private JTextPane datos = new JTextPane();
+    
     
     public Proyecto_arqui() {
         
@@ -62,8 +66,10 @@ public class Proyecto_arqui extends JFrame {
         segundo.setFecha(new Date(2016,05,21));
         segundo.setCapitulos(cap_libro2);
         
-         Libro[] aux={primero,segundo};
-         this.data=aux;
+         data.add(primero);
+         data.add(segundo);
+         seleccion.add(new ArrayList<Integer>());
+         seleccion.add(new ArrayList<Integer>());
         setTitle("Mis libros");
         setSize(1000, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -94,16 +100,23 @@ public class Proyecto_arqui extends JFrame {
         table = new JTable(data,columnas);
         panel = new  JScrollPane(table);
         table.setFillsViewportHeight(true);
-
+        generate = new JButton("Ver libro");
+        generate.addActionListener(new Listener());
+        abajo.add(generate);
         setLayout(new BorderLayout(10, 10));
         add(arriba, BorderLayout.NORTH);
         add(panel, BorderLayout.CENTER);
         add(abajo, BorderLayout.SOUTH);
-       
+   
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {            
             @Override
             public void valueChanged(ListSelectionEvent e) {
                listaLibro(table.getSelectedRow());
+               abajo.removeAll();
+               abajo.add(regresar);
+               abajo.revalidate();
+               abajo.repaint();
+               regresar.addActionListener(new Listener());
             }
         });
 
@@ -111,7 +124,7 @@ public class Proyecto_arqui extends JFrame {
     }
     
     public void listaLibro(int index){
-        this.setTitle("Capitulos( "+this.data[index].getNombre()+")");
+        this.setTitle("Capitulos( "+this.data.get(index).getNombre()+")");
         String col[] = {"Titulo","no. Paginas","Seleccionar"};
 
             DefaultTableModel tableModel = new DefaultTableModel(col, 0) {
@@ -121,39 +134,73 @@ public class Proyecto_arqui extends JFrame {
             }
         };
         
-       
-          for(Capitulo c: this.data[index].getCapitulos()){
-              
-              Object[] data = {c.getTitulo(),c.getNumeroPaginas(),false};
+         int i=0;
+          for(Capitulo c: this.data.get(index).getCapitulos()){
+              boolean flag=false;
+              if (seleccion.get(index).contains(i)){
+                  flag = true;
+              }
+              Object[] data = {c.getTitulo(),c.getNumeroPaginas(),flag};
             tableModel.addRow(data);
+            i++;
           }
        
         capitulos = new JTable(tableModel);
         capitulos.setFillsViewportHeight(true);
-        generate = new JButton("Ver libro");
-       generate.addActionListener(new Listener());
-        abajo.add(generate);
         panel.setViewportView(capitulos);
         panel.revalidate();
-        abajo.revalidate();
-        abajo.repaint();
         panel.repaint();
+        
     }
 
     private class Listener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
              if (e.getSource() == generate) {
-                 ArrayList<Integer> listaCapitulos = new ArrayList<Integer>();
-       
-       
-                 for (int i=0;i<capitulos.getModel().getRowCount();i++){
-                     if((boolean)capitulos.getModel().getValueAt(i, 2)){
-                          listaCapitulos.add(i);
-                     }
-                 }
+                 
+                 Productos productos = new Productos();    
+                Visor visor = new Visor(productos);     
+                int i=0;
+                for (Libro L : data){
+                  productos.agregarLibro(L, seleccion.get(i));
+                  i++;
+                }
+        
+               
+                datos.setText(visor.visualizarProductos());
+                panel.setViewportView(datos);
+                panel.revalidate();
+                panel.repaint();
+                setTitle("Visor");
+                abajo.removeAll();
+                abajo.add(regresar);
+                abajo.revalidate();
+                abajo.repaint();
                 
             }
+             
+             if (e.getSource()==regresar){
+
+                seleccion.get(table.getSelectedRow()).clear();
+                  
+                 for (int i=0;i<capitulos.getModel().getRowCount();i++){
+                     if((boolean)capitulos.getModel().getValueAt(i, 2)){
+                           seleccion.get(table.getSelectedRow()).add(i);
+                     }
+
+                
+                 }
+        setTitle("Mis libros");           
+        panel.setViewportView(table);
+        panel.revalidate();
+        panel.repaint();
+        abajo.removeAll();
+        abajo.add(generate);
+        abajo.revalidate();
+        abajo.repaint();
+             }
+             
+           
             
         }
         
@@ -162,19 +209,7 @@ public class Proyecto_arqui extends JFrame {
     public static void main(String[] args) {
 
         Proyecto_arqui ventana = new Proyecto_arqui();
-         
-        
-        
-        Productos productos = new Productos();    
-        Visor visor = new Visor(productos);     
-        
-        //Lista de capitulos
-        ArrayList<Integer> listaCapitulos = new ArrayList<Integer>();
-        listaCapitulos.add(0);
-        listaCapitulos.add(2);
-        
-        //productos.agregarLibro(primero, listaCapitulos);
-        
+     
     }
 
 

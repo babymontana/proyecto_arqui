@@ -51,7 +51,7 @@ public class Libro {
     
     public String toString(){
         StringBuilder texto = new StringBuilder();
-        texto.append("\nTitulo del libro: " + nombre);
+        texto.append("\n\nTitulo del libro: " + nombre);
         for(Capitulo c: capitulos){
             texto.append(c.toString());
         }

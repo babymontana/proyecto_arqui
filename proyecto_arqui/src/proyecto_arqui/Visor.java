@@ -17,8 +17,8 @@ public class Visor {
         this.productos = productos;
     } 
     
-    public void visualizarProductos(){
-        productos.mostrarLibros();
+    public String visualizarProductos(){
+       return productos.mostrarLibros();
     }
     
     public void presentarProductos(){

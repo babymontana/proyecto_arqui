@@ -38,9 +38,12 @@ public class Productos {
 
     }
     
-    public void mostrarLibros(){
+    public String mostrarLibros(){
+        String texto="";
         for(Libro l: libros){
-            System.out.println(l.toString());
+            texto+=l.toString();
         }
+        
+        return texto;
     }
 }
