@@ -17,8 +17,13 @@ public class Libro {
     private ArrayList<Capitulo> capitulos = new ArrayList<Capitulo>();
     private Date fechaVencimiento;
     
-    public String getFechaVencimiento(){
+    public Date getFechaVencimiento(){
+        return  this.fechaVencimiento;
+    }
+    
+    public String getFechaString(){
         return  this.fechaVencimiento.getYear()+"-"+(this.fechaVencimiento.getMonth())+"-"+this.fechaVencimiento.getDate();
+
     }
     
     public void setFecha(Date fechaVencimiento){
@@ -51,9 +56,11 @@ public class Libro {
     
     public String toString(){
         StringBuilder texto = new StringBuilder();
+        if(this.capitulos.size()>0){     
         texto.append("\n\nTitulo del libro: " + nombre);
         for(Capitulo c: capitulos){
             texto.append(c.toString());
+        }
         }
         return texto.toString();
     }

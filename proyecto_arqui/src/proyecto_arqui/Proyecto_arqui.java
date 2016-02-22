@@ -6,6 +6,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.awt.*;
 import java.awt.event.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -25,16 +27,18 @@ public class Proyecto_arqui extends JFrame {
     private JPanel abajo;
     private JButton generate;
     private JButton regresar=new JButton("Regresar");
-    private JTable capitulos;
+    private JTable capitulos = new JTable();
     private JTextPane datos = new JTextPane();
     
     
     public Proyecto_arqui() {
         
-        
+        //usuario
         usuario.setId(12234);
         usuario.setFechaRegistro(new Date(2008,06,12));
         usuario.setNombre("Emmanuel Páez");
+        
+        //libro 1
          String texto_1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam consequat."; 
         String texto_2 = "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident";
         String texto_3 = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae";
@@ -47,7 +51,7 @@ public class Proyecto_arqui extends JFrame {
         cap_libro1.add(c1_c);
         primero = new Libro();
         primero.setNombre("UML");
-        primero.setFecha(new Date(2005,05,21));
+        primero.setFecha(new Date(2005,01,21));
         primero.setCapitulos(cap_libro1);
         
         //Libro 2
@@ -70,6 +74,8 @@ public class Proyecto_arqui extends JFrame {
          data.add(segundo);
          seleccion.add(new ArrayList<Integer>());
          seleccion.add(new ArrayList<Integer>());
+         
+         
         setTitle("Mis libros");
         setSize(1000, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -91,8 +97,8 @@ public class Proyecto_arqui extends JFrame {
                             };
        
        String [][] data = {
-           {primero.getNombre() , primero.getFechaVencimiento()},
-           {segundo.getNombre() , segundo.getFechaVencimiento()}
+           {primero.getNombre() , primero.getFechaString()},
+           {segundo.getNombre() , segundo.getFechaString()}
        };
        
      
@@ -107,23 +113,24 @@ public class Proyecto_arqui extends JFrame {
         add(arriba, BorderLayout.NORTH);
         add(panel, BorderLayout.CENTER);
         add(abajo, BorderLayout.SOUTH);
-   
+        regresar.addActionListener(new Listener());
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {            
             @Override
             public void valueChanged(ListSelectionEvent e) {
                listaLibro(table.getSelectedRow());
-               abajo.removeAll();
-               abajo.add(regresar);
-               abajo.revalidate();
-               abajo.repaint();
-               regresar.addActionListener(new Listener());
+               
             }
         });
 
 
     }
-    
-    public void listaLibro(int index){
+    //Lista de capitulos del libro seleccionado (validacion vencimiento)
+    public void listaLibro(int index){ 
+        ZoneId zonedId = ZoneId.of( "America/Montreal" );
+        LocalDate today = LocalDate.now(zonedId);
+        Date hoy = new Date(today.getYear(),today.getMonthValue(), today.getDayOfMonth());
+        if(hoy.before(this.data.get(index).getFechaVencimiento())){
+          
         this.setTitle("Capitulos( "+this.data.get(index).getNombre()+")");
         String col[] = {"Titulo","no. Paginas","Seleccionar"};
 
@@ -150,6 +157,15 @@ public class Proyecto_arqui extends JFrame {
         panel.setViewportView(capitulos);
         panel.revalidate();
         panel.repaint();
+        abajo.removeAll();
+        abajo.add(regresar);
+        abajo.revalidate();
+        abajo.repaint();
+        
+        }else{
+        JOptionPane.showMessageDialog(null, "Este producto ha vencido, porfavor renueve su pago", "Pago Vencido", JOptionPane.ERROR_MESSAGE);
+
+        }
         
     }
 
@@ -180,9 +196,10 @@ public class Proyecto_arqui extends JFrame {
             }
              
              if (e.getSource()==regresar){
-
+                 if(table.getSelectedRow()>-1){
                 seleccion.get(table.getSelectedRow()).clear();
-                  
+                 }
+                 
                  for (int i=0;i<capitulos.getModel().getRowCount();i++){
                      if((boolean)capitulos.getModel().getValueAt(i, 2)){
                            seleccion.get(table.getSelectedRow()).add(i);
