@@ -14,6 +14,7 @@ public class Capitulo {
     private String titulo;
     private int numeroPaginas;
     
+    
     public Capitulo(){}
 
     public Capitulo(String texto, String titulo, int numeroPaginas) {

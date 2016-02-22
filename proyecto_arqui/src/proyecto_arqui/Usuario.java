@@ -14,6 +14,7 @@ public class Usuario {
     
     private int id;
     private Visor visor;
+    private String nombre;
     private Date fechaRegistro;
 
     public int getId() {
@@ -38,6 +39,14 @@ public class Usuario {
 
     public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
     
     
