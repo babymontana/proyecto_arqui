@@ -96,17 +96,23 @@ public class Proyecto_arqui extends JFrame {
                         "Fecha Vencimiento"
                             };
        
-       String [][] data = {
-           {primero.getNombre() , primero.getFechaString()},
-           {segundo.getNombre() , segundo.getFechaString()}
-       };
-       
-     
+      DefaultTableModel tableModel = new DefaultTableModel(columnas, 0);
         
-        table = new JTable(data,columnas);
+       for(Libro l : this.data){
+           
+          
+       String [] data = {l.getNombre(),l.getFechaString()};
+        tableModel.addRow(data);  
+
+       }
+       
+       
+       
+        
+        table = new JTable(tableModel);
         panel = new  JScrollPane(table);
         table.setFillsViewportHeight(true);
-        generate = new JButton("Ver libro");
+        generate = new JButton("it al visor");
         generate.addActionListener(new Listener());
         abajo.add(generate);
         setLayout(new BorderLayout(10, 10));
