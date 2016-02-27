@@ -8,7 +8,7 @@ package proyecto_arqui;
  *
  * @author Emmanuel
  */
-public class Capitulo {
+public class Capitulo implements Partes{
     
     private String texto;
     private String titulo;
@@ -53,6 +53,11 @@ public class Capitulo {
         texto.append("\nNo.Pags: " + numeroPaginas);
         texto.append("\nTexto:\n" + this.texto);
         return texto.toString();
+    }
+
+    @Override
+    public String getLongitud() {
+        return this.numeroPaginas+"";
     }
     
     

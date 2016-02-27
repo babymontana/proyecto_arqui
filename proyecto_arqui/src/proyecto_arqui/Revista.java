@@ -10,12 +10,24 @@ import java.util.ArrayList;
  *
  * @author Emmanuel
  */
-public class Revista {
+public class Revista implements Producto{
     
-    private ArrayList<Articulo> articulos = new ArrayList<Articulo>();
+    private ArrayList<Partes> articulos = new ArrayList<Partes>();
     
-    public Articulo getArticulo(int i){
+    public Partes getArticulo(int i){
         return articulos.get(i);
+    }
+
+    
+
+    @Override
+    public ArrayList<Partes> getPartes() {
+        return this.articulos;
+    }
+
+    @Override
+    public void setPartes(ArrayList<Partes> partes) {
+        this.articulos=partes;
     }
     
 }

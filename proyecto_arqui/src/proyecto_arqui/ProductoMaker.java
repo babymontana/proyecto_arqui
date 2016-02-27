@@ -12,27 +12,17 @@ import java.util.ArrayList;
  */
 public class ProductoMaker {
     
-    private Libro libro;
-    private Revista revista;
-    private AudioLibro audioLibro;
-    
-    private BuilderLibro builderLibro = new BuilderLibro();
-    private BuilderRevista builderRevista = new BuilderRevista();
-    private BuilderAudioLibro builderAudioLibro = new BuilderAudioLibro();
+    private Producto producto;
    
-    public Libro generarLibro(Libro l, ArrayList<Integer> listaCapitulos){
-        this.libro = builderLibro.builtLibro(l, listaCapitulos);
-        return this.libro;
+    
+    private BuilderProducto builderProducto = new BuilderProducto();
+   
+   
+    public Producto generarProducto(Producto p, ArrayList<Integer> lista){
+        this.producto = builderProducto.builtProducto(p, lista);
+        return this.producto;
     }
     
-    public Revista generarRevista(){
-        this.revista= builderRevista.builtRevista();
-        return this.revista;
-    }
-    
-    public AudioLibro generarAudioLibro(){
-        this.audioLibro=builderAudioLibro.builtAudiolibro();
-        return this.audioLibro;
-    }
+   
     
 }

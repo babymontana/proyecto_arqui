@@ -11,10 +11,10 @@ import java.util.Date;
  *
  * @author Emmanuel
  */
-public class Libro {
+public class Libro implements Producto{
     
     private String nombre;
-    private ArrayList<Capitulo> capitulos = new ArrayList<Capitulo>();
+    private ArrayList<Partes> capitulos = new ArrayList<Partes>();
     private Date fechaVencimiento;
     
     public Date getFechaVencimiento(){
@@ -30,7 +30,7 @@ public class Libro {
         this.fechaVencimiento=fechaVencimiento;
     }
     
-    public Capitulo getCapitulo(int i){
+    public Partes getCapitulo(int i){
         return capitulos.get(i);
     }
 
@@ -42,11 +42,11 @@ public class Libro {
     
     }
 
-    public ArrayList<Capitulo> getCapitulos() {
+    public ArrayList<Partes> getCapitulos() {
         return capitulos;
     }
 
-    public void setCapitulos(ArrayList<Capitulo> capitulos) {
+    public void setCapitulos(ArrayList<Partes> capitulos) {
         this.capitulos = capitulos;
     }
 
@@ -58,11 +58,23 @@ public class Libro {
         StringBuilder texto = new StringBuilder();
         if(this.capitulos.size()>0){     
         texto.append("\n\nTitulo del libro: " + nombre);
-        for(Capitulo c: capitulos){
+        for(Partes c: capitulos){
             texto.append(c.toString());
         }
         }
         return texto.toString();
+    }
+
+   
+
+    @Override
+    public ArrayList<Partes> getPartes() {
+        return this.capitulos;
+    }
+
+    @Override
+    public void setPartes(ArrayList<Partes> partes) {
+        this.capitulos=partes;
     }
     
     

@@ -8,7 +8,7 @@ package proyecto_arqui;
  *
  * @author Emmanuel
  */
-public class Fragmento {
+public class Fragmento implements Partes{
     
     private double duracion;
     private String autor;
@@ -36,6 +36,11 @@ public class Fragmento {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    @Override
+    public String getLongitud() {
+        return this.duracion+"";
     }
     
     

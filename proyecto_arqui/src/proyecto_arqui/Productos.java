@@ -18,25 +18,18 @@ public class Productos {
 
     private ProductoMaker maker = new ProductoMaker();
 
-    public void agregarLibro(Libro l, ArrayList<Integer> listaCapitulos) {
-        this.libros.add(maker.generarLibro(l, listaCapitulos));
+    public void agregarLibro(Producto l, ArrayList<Integer> listaCapitulos) {
+        this.libros.add((Libro) maker.generarProducto(l, listaCapitulos));
     }
 
-    public void agregarRevista(Revista r) {
-        this.revistas.add(r);
+    public void agregarRevista(Revista r,ArrayList<Integer> listaCapitulos) {
+        this.revistas.add((Revista) maker.generarProducto(r, listaCapitulos));
     }
 
-    public void agregarAudioLibro(AudioLibro a) {
-        this.audioLibros.add(a);
+    public void agregarAudioLibro(AudioLibro a,ArrayList<Integer> listaCapitulos) {
+         this.audioLibros.add((AudioLibro) maker.generarProducto(a, listaCapitulos));
     }
 
-    public void rentaProducto() {
-
-    }
-
-    public void verificarVencimiento() {
-
-    }
     
     public String mostrarLibros(){
         String texto="";

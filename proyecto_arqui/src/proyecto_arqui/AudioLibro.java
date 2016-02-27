@@ -10,12 +10,26 @@ import java.util.ArrayList;
  *
  * @author Emmanuel
  */
-public class AudioLibro {
+public class AudioLibro implements Producto {
     
-    private ArrayList<Fragmento> fragmentos = new ArrayList<Fragmento>();
+    private ArrayList<Partes> fragmentos = new ArrayList<Partes>();
     
-    public Fragmento getFragmento(int i){
+    public Partes getFragmento(int i){
         return fragmentos.get(i);
     }
+
+    
+
+    @Override
+    public ArrayList<Partes> getPartes() {
+        return this.fragmentos;
+    }
+
+    @Override
+    public void setPartes(ArrayList<Partes> partes) {
+        this.fragmentos=partes;
+    }
+
+    
     
 }

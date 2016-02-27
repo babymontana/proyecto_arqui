@@ -8,7 +8,7 @@ package proyecto_arqui;
  *
  * @author Emmanuel
  */
-public class Articulo {
+public class Articulo implements Partes {
     
     private String texto;
     private int numeroArticulo;
@@ -36,6 +36,11 @@ public class Articulo {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    @Override
+    public String getLongitud() {
+        return this.numeroArticulo+"";
     }
     
     
